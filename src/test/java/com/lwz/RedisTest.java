@@ -27,7 +27,7 @@ public class RedisTest {
     @Test
     public void testGet(){
         ValueOperations<String, String> operations = stringRedisTemplate.opsForValue();
-        String name = operations.get("name");
+        String name = operations.get("ligg200309");
         System.out.println(name);
     }
 }
