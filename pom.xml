@@ -76,6 +76,10 @@
       <artifactId>qiniu-java-sdk</artifactId>
       <version>[7.16.0, 7.16.99]</version>
     </dependency>
-
+    <!--redis依赖-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-redis</artifactId>
+    </dependency>
   </dependencies>
 </project>

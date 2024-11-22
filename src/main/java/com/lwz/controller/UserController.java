@@ -10,12 +10,15 @@ import com.lwz.utils.ThreadLocalUtil;
 import jakarta.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/user")
@@ -24,7 +27,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
     //注册接口
     @PostMapping("/register")
     public Result register(@Pattern(regexp = "^\\S{5,16}$",message = "用户名要求5-16位数") String username,
@@ -57,6 +61,10 @@ public class UserController {
                 claims.put("id",loginuser.getId()); // 将用户的唯一标识id存入负载中，以便于后续验证用户身份
                 claims.put("username",loginuser.getUsername());// 将用户名存入负载中，用于在令牌中标识用户
                 String token = JwtUtil.genToken(claims);// 调用JwtUtil的genToken方法生成JWT令牌
+                //把token存储到Redis中
+                ValueOperations<String, String> operations = stringRedisTemplate.opsForValue();
+                //设置token过期时间为1小时
+                operations.set(token,token,1, TimeUnit.HOURS);
                 return Result.success(token);// 返回生成的令牌，此处表示操作成功
             }
             return Result.error("密码错误");
@@ -91,28 +99,34 @@ public class UserController {
 
     //更新用户密码
     @PatchMapping("/updatePwd")
-    public Result updatePwd(@RequestBody Map<String,String> params){
-        //1.参数校验
+    public Result updatePwd(@RequestBody @Validated Map<String, String> params,@RequestHeader("Authorization") String token) {
+        // 1. 参数校验
         String oldPwd = params.get("old_pwd");
-        String newPwd = params.get("new_Pwd");
+        String newPwd = params.get("new_pwd");
         String rePwd = params.get("re_pwd");
 
-        if (!StringUtils.hasLength(oldPwd) || !StringUtils.hasLength(newPwd) || !StringUtils.hasLength(rePwd)){
+        if (!StringUtils.hasLength(oldPwd) || !StringUtils.hasLength(newPwd) || !StringUtils.hasLength(rePwd)) {
             return Result.error("缺少参数错误");
         }
-        //原始密码是否正确
-        Map<String,Object> map = ThreadLocalUtil.get();
-        String username = (String) map.get("username");
-        User loginUser = userService.findbyUserName(username);
-        if (!loginUser.getPassword().equals(Md5Util.getMD5String(oldPwd))){
-            return Result.error("原始密码不正确");
-        }
-        //两次密码是否一致
-        if (!newPwd.equals(newPwd)){
+
+        // 两次密码是否一致
+        if (!newPwd.equals(rePwd)) {
             return Result.error("两次密码不一致");
         }
-        //2.调用Service完成密码更新
+
+        // 原始密码是否正确
+        Map<String, Object> map = ThreadLocalUtil.get();
+        String username = (String) map.get("username");
+        User loginUser = userService.findbyUserName(username);
+        if (!loginUser.getPassword().equals(Md5Util.getMD5String(oldPwd))) {
+            return Result.error("原始密码不正确");
+        }
+
+        // 2. 调用Service完成密码更新
         userService.updatePwd(newPwd);
+        ValueOperations<String, String> operations = stringRedisTemplate.opsForValue();
+        operations.getOperations().delete(token);
         return Result.success();
     }
+
 }
