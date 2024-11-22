@@ -22,7 +22,7 @@ public class CategoryController {
         //查询分类
         Category c = categoryService.findByName(category.getCategoryName());
         if (c != null){
-            return Result.error("分类已存在");
+            return Result.error("分类名称已存在");
         }
         categoryService.add(category);
         return Result.success();

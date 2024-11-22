@@ -1,8 +1,8 @@
-# big-event
+# big-event-springboot
 
 #### 介绍
 SpringBoot+Mybatis学习项目
-
+######  前端地址: [big-event-vue](https://github.com/liggmxa2003/big-event-vue "big-event-springboot")
 #### 系统架构
 前后端分离,人不分离模式开发
 
@@ -12,11 +12,16 @@ SpringBoot+Mybatis学习项目
 2.  xxxx
 3.  xxxx
 
-#### 使用说明
+#### 技术栈
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+
+| 前端技术栈        | 后端技术栈      | 数据库   | 
+|--------------|------------|-------|
+| Vue          | SpringBoot | Mysql |
+| Element-Plus | Mybatis    | Redis |
+| Axios        | Jwt        | xxxx  |
+
+
 
 #### 参与贡献
 
@@ -28,9 +33,9 @@ SpringBoot+Mybatis学习项目
 
 #### 特技
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+1. xxxx
+2. xxxx
+3. xxxx
+4. xxxx
+5. xxxx
+6. xxxx

@@ -63,10 +63,7 @@ public class ArticleController {
             return Result.error("文章不存在");
         }
         //判断文章标题是否重复
-        Article b = articleService.findByTitle(article.getTitle());
-        if (b != null){
-            return Result.error("文章标题重复");
-        }
+        articleService.findByTitle(article.getTitle());
         articleService.update(article);
         return Result.success();
     }

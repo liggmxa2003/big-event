@@ -28,7 +28,7 @@ mybatis:
     map-underscore-to-camel-case: true #开启驼峰命名自动转换
 # 七牛云配置
 qiniu:
-  access-key: z0lp5utyQDwWhh4mgaYUOSiDQXTFltEe1MHE1N0q
-  secret-key: Un5jzbRYYmeCgC01vrpko4NH4O3ZzHPxSNElOxkb
-  bucket-name: uploadlwz
-  domain: http://sncodwj9m.hn-bkt.clouddn.com #https://portal.qiniu.com/
+  access-key: xxxxxxxx
+  secret-key: xxxxxxxx
+  bucket-name: xxxxxxxx
+  domain: xxxxxxxx #https://portal.qiniu.com/
