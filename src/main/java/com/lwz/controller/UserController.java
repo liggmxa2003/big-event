@@ -48,7 +48,7 @@ public class UserController {
     //登录接口
     @PostMapping("/login")
     public Result<String> login(@Pattern(regexp = "^\\S{5,16}$") String username,
-                                @Pattern(regexp = "^\\S{5,16}$",message = "密码要求5-16位数") String password){
+                                @Pattern(regexp = "^\\S{5,16}$") String password){
         User loginuser = userService.findbyUserName(username);
         if (loginuser == null){
             //用户为空，返回提示信息.
