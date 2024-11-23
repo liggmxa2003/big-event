@@ -15,11 +15,11 @@ SpringBoot+Mybatis学习项目
 #### 技术栈
 
 
-| 前端技术栈 | 后端技术栈      | 
-|-------|------------|
-| xxxx  | springboot |
-| xxxx  | mybatis    |
-| xxxx  | jwt        |
+| 前端技术栈        | 后端技术栈      | 数据库   | 
+|--------------|------------|-------|
+| Vue          | SpringBoot | Mysql |
+| Element-Plus | Mybatis    | Redis |
+| Axios        | Jwt        | xxxx  |
 
 
 
