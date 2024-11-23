@@ -22,9 +22,6 @@ SpringBoot+Mybatis学习项目
 | xxxx  | jwt        |
 
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
 
 #### 参与贡献
 
