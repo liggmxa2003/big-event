@@ -77,4 +77,5 @@ public class QiNiuOssUtil {
             throw ex;
         }
     }
+
 }

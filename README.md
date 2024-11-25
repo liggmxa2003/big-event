@@ -7,7 +7,7 @@ SpringBoot+Mybatis学习项目
 前后端分离,人不分离模式开发
 
 #### 启动教程教程
-
+### 启动前提: 运行mysql、运行redis
 1.  xxxx
 2.  xxxx
 3.  xxxx

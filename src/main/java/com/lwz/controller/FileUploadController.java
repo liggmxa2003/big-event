@@ -32,7 +32,6 @@ public class FileUploadController {
         if (file.isEmpty()) {
             return ResponseEntity.badRequest().body(Result.error( "文件为空"));
         }
-
         try {
             // 获取文件输入流
             InputStream inputStream = file.getInputStream();
